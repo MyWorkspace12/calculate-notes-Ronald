@@ -16,18 +16,22 @@ function calculateNote() {
     let data3=Number(note3.value)
     let response=(data1*0.3)+(data2*0.3)+(data3*0.4)
 
-    if (response <3.5) {
-        defi=("Perdió la materia")
-        result.style.color='red'
-    }else if (response>=3.5 && response<=4.5) {
-        defi=("Ganó la materia")
-        result.style.color='orange'
-    }else if (response >4.5 && response<=5.0) {
-        defi=("Nota Sobresaliente")
-        result.style.color='green'
+    if (data1<1.0 || data1>5.0 || data2<1.0 || data2>5.0 || data3<1.0 || data3>5.0) {
+        result.textContent="Una de las notas ingresadas es incorrecta"
+    }else{
+        if (response <3.5) {
+            defi=("Perdió la materia")
+            result.style.color='red'
+        }else if (response>=3.5 && response<=4.5) {
+            defi=("Ganó la materia")
+            result.style.color='orange'
+        }else if (response >4.5 && response<=5.0) {
+            defi=("Nota Sobresaliente")
+            result.style.color='green'
+        }
+    
+        result.textContent=  `Sr@ ${user} su nota es de ${response} ${defi}`
     }
-
-    result.textContent=  `Sr@ ${user} su nota es de ${response} ${defi}`
 }
 
 button.addEventListener('click',predictNote)
@@ -35,6 +39,11 @@ button.addEventListener('click',predictNote)
 function predictNote() {
     let data1=Number(note1.value)
     let data2=Number(note2.value)
-    let predict= (3.5 -(data1 *0.3)-(data2*0.3))/0.4
-    note3.value= `${predict}`
+    if (data1<1.0 || data1>5.0 || data2<1.0 || data2>5.0 ) {
+        result.textContent="Una de las notas ingresadas es incorrecta"
+    }else{
+        let predict= (3.5 -(data1 *0.3)-(data2*0.3))/0.4
+        note3.value= `${predict}`
+    }
+    
 }
